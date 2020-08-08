@@ -1,38 +1,36 @@
 #include <FastLED.h>
 
-#define NUM_LEDS 150
-#define DATA_PIN 3
+#define NUM_LEDS 300
+#define DATA_PIN 2
+#define NUM_STRIPS 1
 
-int brightness= 0;
-float hue=0;
-float inc=0;
+int brightness = 0;
+float hue = 0;
+float inc = 0;
 float hueInc = .3;
 
 CRGB leds[NUM_LEDS];
 
 void setup() {
-  LEDS.addLeds<WS2812, DATA_PIN, RGB>(leds, NUM_LEDS);
-  LEDS.setBrightness(brightness);
+  FastLED.addLeds<NUM_STRIPS, WS2812, DATA_PIN, GRB>(leds, NUM_LEDS);
+  LEDS.setBrightness(255);
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
   bootUp();
-//  hue = 
 }
 
-void bootUp(){
-
-  while(brightness<254){
+void bootUp() {
+  while (brightness < 254) {
     LEDS.setBrightness(brightness);
     loop();
-    brightness+=1;
+    brightness += 1;
     delay(5);
   }
-  
 }
 
 void loop() {
-  hue=inc;
-  inc+=.05;
-
-//  inc += .3;
+  hue = inc;
+  inc += .5;
 
   for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = CHSV(hue, 255, 255);
