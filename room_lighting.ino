@@ -20,7 +20,7 @@ void setup() {
 }
 
 void bootUp() {
-  while (brightness < 254) {
+  while (brightness < 255) {
     LEDS.setBrightness(brightness);
     loop();
     brightness += 1;
